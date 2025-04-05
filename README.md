@@ -1,4 +1,4 @@
-# Deployment Workflow Steps (README.md)
+# Deployment Workflow Steps
 
 ## 1. Repository Checkout
 
@@ -6,24 +6,24 @@ The actions/checkout@v2 GitHub Action is used to clone the repository into the r
 
 ## 2. SSH Deployment Configuration
 
-Environment variables are set using repository secrets, including:
+Those environment variables are set using repository secrets in github, including:
 
-- SSH keys
-- SSH username
-- Remote host address
-- Project path on the remote server
+PRIVATE_KEY
+HOST_NAME
+USER_NAME
+PROJECT_PATH
+GIT_REPO: 
 
-Then:
+after to execute the script happen that: 
 
-- The .ssh directory is created in the runner environment.
-- The SSH private key is configured for authentication.
-- The remote host is added to the known hosts using ssh-keyscan.
+- Was created .ssh directory in the runner environment.
+- was configured SSH private key for authentication.
+
 
 ## 3. SSH Connection and Remote Deployment
 
 An SSH connection is established with the remote server.
-
-- If the project directory does not exist, the repository is cloned from GitHub to the specified path on the server.
-- If the directory exists, the repository is pulled to update the code with the latest changes.
+There are two posibilities :  find the directory or directory does not exist, then it is maked. 
+finally the repository is pulled to update the code with the latest changes, only main branch.
 
 This process allows automated deployment to the remote environment using GitHub Actions and secure SSH access.
